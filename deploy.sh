@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE_NAME="raguraaman/project-3-devops-build"
+IMAGE_NAME="raguraaman/project-3-devops-dev"
 TAG="v1"
 
 docker pull $IMAGE_NAME:$TAG
