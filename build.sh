@@ -1,7 +1,7 @@
 #!/bin/bash
 
 IMAGE_NAME="raguraaman/project-3-devops-dev"
-TAG="v1"
+TAG=${BUILD_NUMBER:-local-dev}
 
 echo "Building image..."
 docker build -t $IMAGE_NAME:$TAG .
