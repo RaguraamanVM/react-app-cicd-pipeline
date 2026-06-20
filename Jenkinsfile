@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "raguraaman/project-3-devops-dev"
+        DEV_IMAGE  = "raguraaman/project-3-devops-dev"
+        PROD_IMAGE = "raguraaman/project-3-devops-prod"
     }
 
     stages {
@@ -15,11 +16,11 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $IMAGE_NAME:$BUILD_NUMBER .'
+                sh 'docker build -t $DEV_IMAGE:$BUILD_NUMBER .'
             }
         }
 
-        stage('Push Docker Image') {
+        stage('Push DEV Image') {
             steps {
                 withCredentials([
                     usernamePassword(
@@ -30,9 +31,29 @@ pipeline {
                 ]) {
                     sh '''
                     echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                    docker push $IMAGE_NAME:$BUILD_NUMBER
+                    docker push $DEV_IMAGE:$BUILD_NUMBER
                     '''
                 }
+            }
+        }
+
+        stage('Approve PROD Release') {
+            steps {
+                input 'Promote image to PROD repository?'
+            }
+        }
+
+        stage('Promote to PROD') {
+            steps {
+                sh '''
+                docker pull $DEV_IMAGE:$BUILD_NUMBER
+
+                docker tag \
+                $DEV_IMAGE:$BUILD_NUMBER \
+                $PROD_IMAGE:$BUILD_NUMBER
+
+                docker push $PROD_IMAGE:$BUILD_NUMBER
+                '''
             }
         }
     }
