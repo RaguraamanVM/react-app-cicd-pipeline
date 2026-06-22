@@ -54,6 +54,8 @@ pipeline {
 		
 	stage('Deploy to EC2') {
     		steps {
+			sh 'docker rm -f devops-app || true'
+        		sh 'docker rm -f project3-devops-app || true'
         		sh 'docker compose down'
         		sh 'docker compose up -d'
     		}
