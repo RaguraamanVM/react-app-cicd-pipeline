@@ -54,8 +54,10 @@ pipeline {
 		
 	stage('Deploy to EC2') {
     		steps {
-        		sh './deploy.sh'
-		}
+        		sh 'docker compose down || true'
+        		sh 'docker compose up -d'
+    		}
 	}
+	
     }
 }
