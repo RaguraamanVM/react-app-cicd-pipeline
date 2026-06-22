@@ -37,11 +37,6 @@ pipeline {
             }
         }
 
-        stage('Approve PROD Release') {
-            steps {
-                input 'Promote image to PROD repository?'
-            }
-        }
 
         stage('Promote to PROD') {
             steps {
