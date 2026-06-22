@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   app: 
     image: raguraaman/project-3-devops-dev:${BUILD_NUMBER}
