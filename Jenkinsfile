@@ -56,5 +56,11 @@ pipeline {
                 '''
             }
         }
+		
+	stage('Deploy to EC2') {
+    		steps {
+        		sh './deploy.sh'
+		}
+	}
     }
 }

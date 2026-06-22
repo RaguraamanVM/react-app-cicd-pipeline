@@ -1,7 +1,7 @@
 #!/bin/bash
 
-IMAGE_NAME="raguraaman/project-3-devops-dev"
-TAG="v1"
+IMAGE_NAME="raguraaman/project-3-devops-prod"
+TAG=$BUILD_NUMBER
 
 docker pull $IMAGE_NAME:$TAG
 
@@ -12,5 +12,3 @@ docker run -d \
   --name devops-app \
   -p 80:80 \
   $IMAGE_NAME:$TAG
-
-echo "Deployment completed."
