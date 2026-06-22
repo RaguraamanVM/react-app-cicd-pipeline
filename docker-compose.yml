@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  app: 
+    image: raguraaman/project-3-devops-dev:${BUILD_NUMBER}
+    container_name: project3-devops-app
+    ports:
+      - "80:80"
+    restart: unless-stopped
