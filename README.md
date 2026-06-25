@@ -324,5 +324,4 @@ This project successfully demonstrates an end-to-end DevOps CI/CD implementation
 ---
 
 ## Author
-
-## Raguraaman V M
+Raguraaman V M
